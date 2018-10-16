@@ -18,7 +18,8 @@ module.exports = {
             presets: [
               '@babel/preset-env',
               '@babel/preset-react'
-            ]
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties']
           }
         }
       },
@@ -30,6 +31,17 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.mp4$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+            }
+          }
+        ]
       }
     ]
   },

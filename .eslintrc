@@ -1,0 +1,93 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        "aspects": [
+          "invalidHref"
+        ]
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "components": [
+          "Label"
+        ],
+        "required": {
+          "every": [
+            "id"
+          ]
+        },
+        "allowChildren": true
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "never",
+      "children"
+    ],
+    "import/no-extraneous-dependencies": "off",
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/no-duplicates": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {},
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
