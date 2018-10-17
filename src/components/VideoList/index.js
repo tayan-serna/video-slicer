@@ -41,6 +41,7 @@ const initialState = {
     name: '',
     start: '',
     end: '',
+    tags: '',
   },
   currentClipId: null,
   currentVideoId: null,
@@ -77,16 +78,17 @@ class VideoList extends Component {
       name: `${clip.name} // ${clip.start} - ${clip.end}`,
       src: `${videoSrc}#t=${clip.start},${clip.end}`,
       thumbnail: getVideoThumbnail(videoSrc),
+      tags: clip.tags ? clip.tags.split(/\s?,\s?/g) : [],
     });
 
     this.setState({ ...initialState });
   }
 
-  onEdit = (currentVideoId, videoSrc, currentClipId, clipName) => {
-    const newName = clipName.replace(/( \/\/ .*)/g, '');
+  onEdit = (currentVideoId, videoSrc, currentClip) => {
+    const newName = currentClip.name.replace(/( \/\/ .*)/g, '');
     const { clip } = this.state;
     this.setState({
-      currentClipId,
+      currentClipId: currentClip.id,
       currentVideoId,
       isNew: false,
       videoSrc,
@@ -94,6 +96,7 @@ class VideoList extends Component {
       clip: {
         ...clip,
         name: newName,
+        tags: currentClip.tags.join(),
       },
     });
   }
@@ -113,6 +116,7 @@ class VideoList extends Component {
       name: `${clip.name} // ${clip.start} - ${clip.end}`,
       src: `${videoSrc}#t=${clip.start},${clip.end}`,
       thumbnail: getVideoThumbnail(videoSrc),
+      tags: clip.tags ? clip.tags.split(/\s?,\s?/g) : [],
     });
 
     this.setState({ ...initialState });
@@ -188,11 +192,10 @@ class VideoList extends Component {
                     handleClick={handleClickClip}
                     videoId={video.id}
                     onDeleteClip={onDeleteClip}
-                    onEditClip={(clipId, clipName) => this.onEdit(
+                    onEditClip={currentClip => this.onEdit(
                       video.id,
                       video.src,
-                      clipId,
-                      clipName,
+                      currentClip,
                     )}
                     onSaveClip={(videoId, clipId) => this.onSaveClip(videoId, clipId)}
                   />
@@ -230,6 +233,13 @@ class VideoList extends Component {
             placeholder="Clip End"
             type="number"
             value={clip.end}
+          />
+          <TextField
+            id="tags"
+            label="tags"
+            onChange={value => this.handleChangeClip('tags', value)}
+            placeholder="example, example2"
+            value={clip.tags}
           />
         </DialogContainer>
       </VideoListContainer>

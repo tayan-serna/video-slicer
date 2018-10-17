@@ -31,6 +31,11 @@ const MainContainer = glamorous.section({
 const AdviceContainer = glamorous.section({
   padding: '2rem',
   fontSize: '2rem',
+  textAlign: 'center',
+});
+
+const ClipsContainer = glamorous.section({
+  textAlign: 'left',
 });
 
 class Favorite extends Component {
@@ -80,19 +85,21 @@ class Favorite extends Component {
           : <div className="video-alert">There is not a select clip, please select one</div>
         }
         <Divider />
-        {
-          favoriteClips.length
-            ? (
-              <ClipList
-                clips={favoriteClips}
-                handleClick={this.handleClickClip}
-                onlyView
-              />
-            )
-            : (
-              <AdviceContainer>You have not saved clips</AdviceContainer>
-            )
-        }
+        <ClipsContainer>
+          {
+            favoriteClips.length
+              ? (
+                <ClipList
+                  clips={favoriteClips}
+                  handleClick={this.handleClickClip}
+                  onlyView
+                />
+              )
+              : (
+                <AdviceContainer>You have not saved clips</AdviceContainer>
+              )
+          }
+        </ClipsContainer>
       </MainContainer>
     );
   }
